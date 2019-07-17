@@ -18,10 +18,12 @@ print '<form action="http://localhost:5000/" method="POST">';
 foreach(range(1, $tests) as $T){
     print '<br> Test '.$T.'<br>';
     foreach(range(1, $numberOfQuerys) as $N){
-        print ('<input type="text" name="text'.$T.$N.'"><br>');
-        
+        print ('<input type="text" name="text'.$T.$N.'"><br>');      
     }
 }
-print '<input type="submit" name="Submit" value="Submit">';
+print ('<input type="hidden" name="matrixDimension" value="'.$matrixDimension.'"><br>');
+print ('<input type="hidden" name="numberOfQuerys" value="'.$numberOfQuerys.'"><br>');
+print ('<input type="hidden" name="tests" value="'.$tests.'"><br>');
+print '<input type="submit" name="Submit" value="Submit" class="btn btn-primary">';
 print '</form>'
 ?>

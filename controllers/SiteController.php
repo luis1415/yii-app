@@ -11,6 +11,8 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
 
+use app\models\QueryForm;
+
 class SiteController extends Controller
 {
     /**
@@ -137,14 +139,22 @@ class SiteController extends Controller
         $model = new EntryForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // valid data received in $model
-
-            // do something meaningful here about $model ...
-
-            return $this->render('entry-confirm', ['model' => $model]);
+            // return $this->render('entry-confirm', ['model' => $model]);
+            return $this->redirect(array('site/querys', 'tests' => $model['tests'], 'matrixDimension' => $model['matrixDimension'], 'numberOfQuerys' => $model['numberOfQuerys']));
         } else {
-            // either the page is initially displayed or there is some validation error
             return $this->render('entry', ['model' => $model]);
+        }
+    }
+
+    public function actionQuerys()
+    {
+        $model = new QueryForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            return $this->render('querys-results', ['model' => $model]);
+        } else {
+            return $this->render('querys', ['model' => $model]);
         }
     }
 }
